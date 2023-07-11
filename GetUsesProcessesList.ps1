@@ -29,15 +29,15 @@ ForEach($el in $processList) {
 
 }
 
-$fileCount = (Get-ChildItem C:\Users\mateu\Documents\ProcessScriptData\dailydata* | Measure-Object).Count + 1
+$fileCount = (Get-ChildItem $env:USERPROFILE\Documents\ProcessScriptData\dailydata* | Measure-Object).Count + 1
 
 $fileName = "dailydata_"+ $fileCount + "_" + (Get-Date -Format "dd_MM_yyyy")
 
-New-Item -Path C:\Users\mateu\Documents\ProcessScriptData -ItemType "file" -Name $fileName
+New-Item -Path $env:USERPROFILE\Documents\ProcessScriptData -ItemType "file" -Name $fileName
 
 #Iterate through list and add data to file
 
 Foreach($v in $List) {
     $fileFormat = "{0} {1} {2}" -f $v.Id, $v.ProcessName, $v.StartTime
-    Add-Content -Path C:\Users\mateu\Documents\ProcessScriptData\$fileName -Value $fileFormat
+    Add-Content -Path $env:USERPROFILE\Documents\ProcessScriptData\$fileName -Value $fileFormat
 }
